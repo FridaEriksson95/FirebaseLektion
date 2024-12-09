@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "579901425659",
+    "project_id": "fir-lektion-ae00e",
+    "storage_bucket": "fir-lektion-ae00e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579901425659:android:70ced9c33005e73f256d5e",
+        "android_client_info": {
+          "package_name": "com.example.firebaselektion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn_xP0pusdAttZtDZmrfkceQqeoYj2c-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
