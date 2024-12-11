@@ -9,6 +9,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.firebaselektion.databinding.ActivityMainBinding
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import java.util.zip.Inflater
 
 class MainActivity : AppCompatActivity() {
@@ -36,6 +38,9 @@ class MainActivity : AppCompatActivity() {
 
         personAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, persons)
         binding.lvPersons.adapter = personAdapter
+
+//        Firebase.auth.signOut()
+        binding.tvEmail.text = Firebase.auth.currentUser?.email
 
         vm.persons.observe(this){ personList ->
             persons.clear()

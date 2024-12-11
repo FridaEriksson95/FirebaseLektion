@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
 
@@ -11,6 +13,8 @@ class FirebaseManager {
 
     private val db = Firebase.firestore
     private val _persons = MutableLiveData(mutableListOf<Person>())
+
+    lateinit var currentUser : FirebaseUser
 
     val persons: LiveData<MutableList<Person>> get() = _persons
 
@@ -20,7 +24,10 @@ class FirebaseManager {
     }
 
     fun addSnapShotListener() {
-        db.collection("persons").addSnapshotListener{ snapshot, error ->
+
+        currentUser = Firebase.auth.currentUser ?: return
+
+        db.collection("users").document(currentUser.uid).collection("persons").addSnapshotListener{ snapshot, error ->
 
             if(snapshot != null) {
                 val currentList = mutableListOf<Person>()
@@ -39,8 +46,9 @@ class FirebaseManager {
 
     fun addPerson(name :String, phone: String) {
         val person = Person(name, phone)
+        currentUser = Firebase.auth.currentUser ?: return
 
-        db.collection("persons").add(person)
+        db.collection("users").document(currentUser.uid).collection("persons").add(person)
             .addOnSuccessListener {
             Log.i("SOUT", "added person to firestore")
         }.addOnFailureListener {
